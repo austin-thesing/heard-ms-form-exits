@@ -1,0 +1,23 @@
+I am building a cloudflare worker. The code being hosted in cloudflare is the worker.js file and the code being run on the front end of my site is the client.js file. This is a worker that copies the values of a webflow form and sends them to a zapier webhook if a user tries to exit the form before fully completing it.
+
+See my chatgpt conversation summary below:
+
+Initial Request:
+You asked for help capturing form data from a Webflow form submission, including handling skipped or empty fields, radio buttons, and select fields with disabled options. Additionally, you wanted to capture the user’s last completed step in the form and handle situations where the user exits the form without submitting. You also wanted to send the data to a Cloudflare worker, bypassing CORS issues.
+
+Key Points:
+
+	1.	Form Data Collection:
+	•	Capture all fields from the form, including empty ones, but mark skipped fields (e.g., empty values or disabled select options) with an empty string ('').
+	•	Radio buttons should be treated as a group (same name), and only the selected value should be captured.
+	•	Only collect non-empty values from text fields.
+	2.	CORS Issues:
+	•	The initial request to Zapier’s webhook failed due to CORS policy restrictions. You decided to switch to a Cloudflare Worker for handling the POST request.
+	3.	Cloudflare Worker:
+	•	You provided the updated Cloudflare worker URL (e.g., https://h-form.designxdevelop.com/) and requested that the form data be sent via a POST request to the worker.
+	4.	Form Submission and Exit Intents:
+	•	Data should only be sent to the Cloudflare worker if the user attempts to exit the form or drops off before completing it.
+	•	No data should be sent if the form is successfully submitted.
+	•	Added a way to track the user’s last step in the form (using a custom progress indicator).
+	5.	Error Handling and Testing:
+	•	CORS policy issues were resolved with the Cloudflare worker.
